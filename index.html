@@ -528,53 +528,6 @@ send(myData);
 <slide class="segue dark nobackground">
   <aside class="gdbar"><img src="images/webrtc_icon_128.png"></aside>
   <hgroup class="auto-fadein">
-    <h2>Servers and Protocols</h2>
-    <h3>Peer to peer &mdash; but we need servers  :^\</h3>
-  </hgroup>
-  <aside class="note">
-      <p>So we just talked about how WebRTC can do all sorts of clever peer-to-peer stuff. But in order to bring up the peer-to-peer connection, we need servers to help coordinate things.
-      The first thing we need to do is something we call signaling.</p>
-  </aside>
-</slide>
-
-<slide class="nobackground">
-  <hgroup>
-    <h2>Abstract Signaling</h2>
-  </hgroup>
-  <article>
-    <ul>
-      <li>Need to exchange 'session description' objects:</li>
-      <ul class="tight">
-      <li>What formats I support, what I want to send</li>
-      <li>Network information for peer-to-peer setup</li>
-      </ul>
-      <li>Can use any messaging mechanism</li>
-      <li>Can use any messaging protocol</li>
-    </ul>
-  </article>
-  <aside class="note">
-    <p>Signalling is the process of coordinating communication. Similar to, when you make a phone call, the phone system sends a message to the person you're calling indicating that there's an incoming call. Then, when you answer the call, a message is sent back indicating the call is live.</p>
-    <p>The same is true for WebRTC. A message needs to get sent by each side indicating the parameters they want to use for the call. This is called a "session description", and it includes a bunch of details regarding codecs, encryption, network information, etc.</p>
-    <p>The details aren't critical for most apps; they just need to exchange these messages in some way. The mechanism is up to the app - it can use WebSockets, Google Cloud Messaging, XHR, whatever it wants to use.</p>
-    <p>Similarly, the exact protocol through which these are exchanged is also up to the app - many apps will send these messages as JSON, although some apps may use the standard SIP or XMPP protocols.</p>
-  </aside>
-</slide>
-
-<slide>
-  <hgroup>
-    <h2>Signaling Diagram</h2>
-  </hgroup>
-  <article class="flexbox vcenter">
-    <img src="images/jsep.png" alt="JSEP architecture diagram">
-  </article>
-      <aside class="note">
-      <p>Here's a diagram that demonstrates this process. The caller sends a session description to its signaling server in the cloud, which then forwards this on to the callee. Similarly, the callee then sends its own session description back through the cloud to the caller. Once each side has given the session descriptions to RTCPeerConnection, the peer-to-peer link is established and media can flow.</p>
-    </aside>
-</slide>
-
-<slide class="segue dark nobackground">
-  <aside class="gdbar"><img src="images/webrtc_icon_128.png"></aside>
-  <hgroup class="auto-fadein">
     <h2>STUN and TURN</h2>
     <h3>P2P in the age of firewalls and NATs</h3>
   </hgroup>
